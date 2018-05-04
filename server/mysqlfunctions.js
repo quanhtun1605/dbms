@@ -17,7 +17,7 @@ con.connect(function (err) {
 });
 
 exports.getUserInfo = function getUserInfo(start, callback) {
-	con.query("select * from userInfo limit 50000", function (err, rows) {
+	con.query("select * from deviceinfo", function (err, rows) {
 		callback(null, JSON.stringify(serverAnswerGetUserInfo(rows, start)));
 	})
 };
@@ -25,14 +25,6 @@ exports.getUserInfo = function getUserInfo(start, callback) {
 function serverAnswerGetUserInfo(Rows, Start) {
 	var result = [];
 	var duration = Date.now() - Start;
-	for (var i=0; i<Rows.length; i++) {
-        result.push({
-        	id: Rows[i].id,
-        	email: Rows[i].email,
-        	salt: Rows[i].salt,
-        	hash: Rows[i].hash
-        })
-    }
     result.push({
     	duration: duration
     })
@@ -48,13 +40,6 @@ exports.getAppleDeviceInfo = function getAppleDeviceInfo(start, callback) {
 function serverAnswerGetAppleDeviceInfo(Rows, Start) {
 	var result = [];
 	var duration = Date.now() - Start;
-	for (var i=0; i<Rows.length; i++) {
-        result.push({
-        	id: Rows[i].id,
-        	mask: Rows[i].mask,
-        	vendor: Rows[i].vendor
-        })
-    }
     result.push({
     	duration: duration
     })
@@ -62,7 +47,7 @@ function serverAnswerGetAppleDeviceInfo(Rows, Start) {
 }
 
 exports.getUserInfoJoinUserDevice = function getUserInfoJoinUserDevice(start, callback) {
-	con.query("select * from userDevice ud JOIN deviceInfo di on ud.deviceID = di.id limit 50000", function (err, rows) {
+	con.query("select * from userDevice ud JOIN deviceInfo di on ud.deviceID = di.id limit 500", function (err, rows) {
 		callback(null, JSON.stringify(serverAnswerGetUserInfoJoinUserDevice(rows, start)));
 	})
 };
@@ -70,12 +55,6 @@ exports.getUserInfoJoinUserDevice = function getUserInfoJoinUserDevice(start, ca
 function serverAnswerGetUserInfoJoinUserDevice(Rows, Start) {
 	var result = [];
 	var duration = Date.now() - Start;
-	for (var i=0; i<Rows.length; i++) {
-        result.push({
-        	deviceID: Rows[i].deviceID,
-        	email: Rows[i].email
-        })
-    }
     result.push({
     	duration: duration
     })
@@ -83,7 +62,7 @@ function serverAnswerGetUserInfoJoinUserDevice(Rows, Start) {
 }
 
 exports.getUserInfoJoinUserDeviceJoinDeviceInfo = function getUserInfoJoinUserDeviceJoinDeviceInfo(start, callback) {
-	con.query("select * from userDevice ud INNER JOIN deviceInfo di on ud.deviceID = di.id INNER JOIN userInfo ui on ui.id = ud.loginID limit 1000", function (err, rows) {
+	con.query("select * from userDevice ud INNER JOIN deviceInfo di on ud.deviceID = di.id INNER JOIN userInfo ui on ui.id = ud.loginID limit 10", function (err, rows) {
 		callback(null, JSON.stringify(serverAnswerGetUserInfoJoinUserDeviceJoinDeviceInfo(rows, start)));
 	})
 };
@@ -91,13 +70,6 @@ exports.getUserInfoJoinUserDeviceJoinDeviceInfo = function getUserInfoJoinUserDe
 function serverAnswerGetUserInfoJoinUserDeviceJoinDeviceInfo(Rows, Start) {
 	var result = [];
 	var duration = Date.now() - Start;
-	for (var i=0; i<Rows.length; i++) {
-        result.push({
-        	deviceID: Rows[i].deviceID,
-        	email: Rows[i].email,
-        	vendor: Rows[i].vendor
-        })
-    }
     result.push({
     	duration: duration
     })
@@ -105,28 +77,28 @@ function serverAnswerGetUserInfoJoinUserDeviceJoinDeviceInfo(Rows, Start) {
 }
 
 exports.insertUser = function insertUser(start, callback) {
-	con.query("INSERT INTO `dbms`.`userinfo` (`id`, `email`, `salt`, `hash`) VALUES ('1', '231', '41421', '1421124')", function (err, rows) {
-		var result = {};
-        if (rows.affectedRows = 1) result = {'status' : 'done'};
-        else result = {'status' : 'fail'};
+	con.query("INSERT INTO `dbms`.`deviceinfo` (`id`, `mask`, `vendor`) VALUES ('1000000000', '231', '41421')", function (err, rows) {
+		var result = [];
+        var duration = Date.now() - start;
+        result = {'duration' : duration};
         callback(null, result);
 	})
 }
 
 exports.deleteUser = function deleteUser(start, callback) {
-	con.query("DELETE FROM `dbms`.`userinfo` WHERE `id`='1')", function (err, rows) {
-		var result = {};
-        if (rows.affectedRows = 1) result = {'status' : 'done'};
-        else result = {'status' : 'fail'};
+	con.query("DELETE FROM `dbms`.`deviceinfo` WHERE `id`='100000000')", function (err, rows) {
+		var result = [];
+        var duration = Date.now() - start;
+        result = {'duration' : duration};
         callback(null, result);
 	})
 }
 
 exports.updateUser = function updateUser(start, callback) {
-	con.query("UPDATE `dbms`.`userinfo` SET `email`='234' WHERE `id`='1'", function (err, rows) {
-		var result = {};
-        if (rows.affectedRows = 1) result = {'status' : 'done'};
-        else result = {'status' : 'fail'};
+	con.query("UPDATE `dbms`.`deviceinfo` SET `mask`='234' WHERE `id`='100000000'", function (err, rows) {
+		var result = [];
+        var duration = Date.now() - start;
+        result = {'duration' : duration};
         callback(null, result);
 	})
 }
