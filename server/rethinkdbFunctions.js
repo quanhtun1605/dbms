@@ -63,7 +63,7 @@ function serverAnswerRGetUserInfoJoinUserDevice(Start) {
 exports.rinsertUser = function rinsertUser(start, callback) {
 	r.connect({ host: 'localhost', port: 28015 }, function(err, conn) {
   		if(err) throw err;
-  		r.db('dbms').table('deviceinfo').insert({id:100000000,mask:100000,vendor:"asdad"}).run(conn, function(err, res) {
+  		r.db('dbms').table('deviceinfo').insert({id:100000000,mash:100000,vendor:"asdad"}).run(conn, function(err, res) {
     		if(err) throw err;
     		console.log(res);
     		callback(null, JSON.stringify(serverAnswerRInsertUser(start)));
@@ -103,7 +103,7 @@ function serverAnswerRDeleteUser(Start) {
 exports.rupdateUser = function rupdateUser(start, callback) {
 	r.connect({ host: 'localhost', port: 28015 }, function(err, conn) {
   		if(err) throw err;
-  		r.db('dbms').table('deviceinfo').filter({id:100000000}).update({mask:"asddsgfg"}).run(conn, function(err, res) {
+  		r.db('dbms').table('deviceinfo').filter({id:100000000}).update({mash:"asddsgfg"}).run(conn, function(err, res) {
     		if(err) throw err;
     		console.log(res);
     		callback(null, JSON.stringify(serverAnswerRUpdateUser(start)));

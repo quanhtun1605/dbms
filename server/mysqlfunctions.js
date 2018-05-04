@@ -77,7 +77,7 @@ function serverAnswerGetUserInfoJoinUserDeviceJoinDeviceInfo(Rows, Start) {
 }
 
 exports.insertUser = function insertUser(start, callback) {
-	con.query("INSERT INTO `dbms`.`deviceinfo` (`id`, `mask`, `vendor`) VALUES ('1000000000', '231', '41421')", function (err, rows) {
+	con.query("INSERT INTO `dbmsfinal`.`deviceinfo` (`id`, `mash`, `vendor`) VALUES (100000000, '231', '41421')", function (err, rows) {
 		var result = [];
         var duration = Date.now() - start;
         result = {'duration' : duration};
@@ -86,7 +86,7 @@ exports.insertUser = function insertUser(start, callback) {
 }
 
 exports.deleteUser = function deleteUser(start, callback) {
-	con.query("DELETE FROM `dbms`.`deviceinfo` WHERE `id`='100000000')", function (err, rows) {
+	con.query("DELETE FROM `dbmsfinal`.`deviceinfo` WHERE `id`=100000000", function (err, rows) {
 		var result = [];
         var duration = Date.now() - start;
         result = {'duration' : duration};
@@ -95,7 +95,7 @@ exports.deleteUser = function deleteUser(start, callback) {
 }
 
 exports.updateUser = function updateUser(start, callback) {
-	con.query("UPDATE `dbms`.`deviceinfo` SET `mask`='234' WHERE `id`='100000000'", function (err, rows) {
+	con.query("UPDATE `dbmsfinal`.`deviceinfo` SET `mash`='234' WHERE `id`='100000000'", function (err, rows) {
 		var result = [];
         var duration = Date.now() - start;
         result = {'duration' : duration};
